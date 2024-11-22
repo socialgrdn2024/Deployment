@@ -2,7 +2,7 @@
   "name": "socialgrdn",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://your-backend-render-url.onrender.com",
+  "proxy": "https://socialgrdn-backend.onrender.com",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@googlemaps/js-api-loader": "^1.16.8",
