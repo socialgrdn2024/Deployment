@@ -90,10 +90,6 @@ app.listen(port, (err) => {
             user: process.env.DB_USER,
             password: process.env.DB_PASSWORD,
             database: process.env.DB_NAME,
-            // Add SSL for production
-            ssl: process.env.NODE_ENV === 'production' ? {
-                rejectUnauthorized: true
-            } : false
         });
 
         db.connect((err) => {
