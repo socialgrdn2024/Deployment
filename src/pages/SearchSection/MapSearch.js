@@ -60,7 +60,7 @@ const useFetchSearchResults = () => {
       setLoading(true); // Set loading to true while fetching
       setError(null); // Reset any previous errors
       try {
-        const response = await fetch('/api/getSearchResults'); // Fetch data from API
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/getSearchResults`); // Fetch data from API
         if (!response.ok) {
           throw new Error('Failed to fetch search results'); // Throw an error if the response is not okay
         }
