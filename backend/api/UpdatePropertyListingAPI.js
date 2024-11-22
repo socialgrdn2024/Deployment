@@ -169,7 +169,7 @@ router.patch('/:propertyId', async (req, res) => {
 
           // Update other images if provided
           if (propertyData.otherImageUrls && propertyData.otherImageUrls.length > 0) {
-            const deleteOtherImagesQuery = `DELETE FROM PropertyOtherImages WHERE property_id = ?`;
+            const deleteOtherImagesQuery = `DELETE FROM propertyotherimages WHERE property_id = ?`;
             const insertOtherImagesQuery = `
               INSERT INTO propertyotherimages (property_id, image_url) 
               VALUES ?

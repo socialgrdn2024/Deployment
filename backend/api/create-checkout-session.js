@@ -38,8 +38,8 @@ router.post('/', async (req, res) => {
                 },
             ],
             mode: 'payment',
-            success_url: `http://localhost:3001/RentConfirmation?rental_id=${rental_id}`,
-            cancel_url: `http://localhost:3001/RentFailed?rental_id=${rental_id}`,
+            success_url: `${process.env.FRONTEND_URL}/RentConfirmation?rental_id=${rental_id}`,
+            cancel_url: `${process.env.FRONTEND_URL}/RentFailed?rental_id=${rental_id}`,
         });
         // Log the session URL to the console for testing purposes
         console.log("Stripe session created, redirecting to:", session.url);
