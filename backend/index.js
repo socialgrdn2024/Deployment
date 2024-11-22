@@ -36,7 +36,7 @@ const getAllMonthlyReportAPI = require('./api/GetAllMonthlyReportAPI');
 
 const app = express();
 const port = process.env.PORT || 3000;
-const corsOptions = { origin: process.env.FRONTEND_URL };
+const corsOptions = { origin: process.env.FRONTEND_URL};
 
 // Middleware
 app.use(bodyParser.json());
