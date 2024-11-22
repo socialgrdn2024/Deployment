@@ -23,7 +23,7 @@ export default function Payouts() {
     // Memoize the fetchPayouts function
     const fetchPayouts = useCallback(async () => {
         try {
-            const response = await fetch(`/api/getPayouts?userID=${userId}`);
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/getPayouts?userID=${userId}`);
             if (!response.ok) throw new Error("Failed to fetch payouts");
             const data = await response.json();
             if (data.length === 0) {

@@ -25,7 +25,7 @@ const ProtectedRoute = ({ children, allowedRoles = [] }) => {
         try 
         {
           // Fetch user role from the backend using email
-          const response = await fetch(`/api/getUserRole?email=${user.email}`);
+          const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/getUserRole?email=${user.email}`);
 
           if (!response.ok) {
               console.error('Error fetching user role:', response.statusText);

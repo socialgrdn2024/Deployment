@@ -156,7 +156,7 @@ export default function SignUp() {
 			console.log('Data being sent to the server:', formData);
 
 			// This is the POST request to add the user data to the database
-			const response = await fetch('/api/users/register', {
+			const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/users/register`, {
 				method: 'POST',
 				credentials: 'include',
 				headers: { 'Content-Type': 'application/json' },

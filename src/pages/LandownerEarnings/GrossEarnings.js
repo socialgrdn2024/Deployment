@@ -49,7 +49,7 @@ export default function GrossEarnings() {
 			setError(null);
 			try {
 				// Fetch gross earnings API route
-				const response = await fetch(`/api/getEarnings?userID=${userId}`);
+				const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/getEarnings?userID=${userId}`);
 				// Check if the response is not OK
 				if (!response.ok) {
 					throw new Error('Error fetching gross earnings:', error);
