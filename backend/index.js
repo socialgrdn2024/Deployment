@@ -36,11 +36,12 @@ const getAllMonthlyReportAPI = require('./api/GetAllMonthlyReportAPI');
 
 const app = express();
 const port = process.env.PORT || 3000;
+const corsOptions = { origin: process.env.FRONTEND_URL };
 
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../build')));
