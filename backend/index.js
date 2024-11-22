@@ -44,7 +44,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../frontend/build')));
+app.use(express.static(path.join(__dirname, '../build')));
 
 // Route files gonna use for the API endpoint
 app.use('/api/users', userRoutes);
@@ -77,9 +77,9 @@ app.use('/api/getAllEarningsReport', getAllEarningsReportAPI);
 app.use('/api/getAllMonthlyReport', getAllMonthlyReportAPI);
 // The "catchall" handler
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
-  });
-  
+	res.sendFile(path.join(__dirname, '../build/index.html'));
+});
+
 // Server and database setup
 app.listen(port, (err) => {
     if (err) {
@@ -90,6 +90,7 @@ app.listen(port, (err) => {
             user: process.env.DB_USER,
             password: process.env.DB_PASSWORD,
             database: process.env.DB_NAME,
+
         });
 
         db.connect((err) => {
