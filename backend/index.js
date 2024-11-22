@@ -1,20 +1,8 @@
-/**
- * index.js
- * Description: This is the file that handles the server setup and database connection
- * Backend Author:  Donald Jans Uy
- *                  Lilian Huh
- *                  Shelyn Del Mundo
- *                  Tiana Bautista
- * Date: 2024-10-30
- */
-
 // Importing libraries and modules for server and database connection
-const credentials = require('./_credentials');
 const express = require('express');
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
 const path = require('path');
 
 // Import route files
@@ -47,12 +35,12 @@ const getAllEarningsReportAPI = require('./api/GetAllEarningsReportAPI');
 const getAllMonthlyReportAPI = require('./api/GetAllMonthlyReportAPI');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors({ origin: 'http://localhost:3001' }));
+app.use(cors());
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../build')));
@@ -97,20 +85,23 @@ app.listen(port, (err) => {
         console.error('Error starting the server:', err);
     } else {
         const db = mysql.createConnection({
-            host: credentials.host,
-            user: credentials.user,
-            password: credentials.password,
-            database: credentials.database,
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_NAME,
+            // Add SSL for production
+            ssl: process.env.NODE_ENV === 'production' ? {
+                rejectUnauthorized: true
+            } : false
         });
 
-        // Use db.connect() instead of connection.connect()
         db.connect((err) => {
             if (err) {
                 console.error('❌ Database Connection Failed:', err.message);
                 return;
             }
             console.log('Successfully Connected to Database');
-			// Add this block to show available tables
+            
             db.query("SHOW TABLES", (err, results) => {
                 if (err) {
                     console.error('Error showing tables:', err);

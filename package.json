@@ -2,7 +2,7 @@
   "name": "socialgrdn",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3000",
+  "proxy": "https://your-backend-render-url.onrender.com",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@googlemaps/js-api-loader": "^1.16.8",
@@ -48,13 +48,11 @@
     "workbox-streams": "^6.6.0"
   },
   "scripts": {
-    "start": "node backend/index.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
+    "serve": "serve build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "dev:react": "set PORT=3001 && react-scripts start",
-    "dev:backend": "nodemon backend/index.js",
-    "dev": "concurrently \"npm run dev:react\" \"npm run dev:backend\""
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
