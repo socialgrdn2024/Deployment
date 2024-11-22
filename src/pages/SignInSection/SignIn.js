@@ -24,7 +24,7 @@ export default function SignIn() {
 	// Function to fetch userID from GetProfile API
 	const fetchUserId = async (email) => {
 		try {
-			const response = await fetch(`/api/profile?email=${email}`);
+			const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/profile?email=${email}`);
 			if (response.ok) {
 				const data = await response.json();
 				const userId = data.userID;

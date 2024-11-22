@@ -41,7 +41,7 @@ export default function Profile() {
         const fetchUserProfile = async () => {
             try {
                 // Fetch user profile based on userID
-                const response = await fetch(`/api/getProfile?userID=${userId}`);
+                const response = await fetch(`{process.env.REACT_APP_BACKEND_URL}/api/getProfile?userID=${userId}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }

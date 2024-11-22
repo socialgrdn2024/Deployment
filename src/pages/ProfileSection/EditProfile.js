@@ -53,7 +53,7 @@ export default function EditProfile() {
                 }
 
                 // Fetch user data from the API using the userID
-                const response = await fetch(`http://localhost:3000/api/getProfile?userID=${userId}`);
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/getProfile?userID=${userId}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -174,7 +174,7 @@ export default function EditProfile() {
 
         try {
             // Make the PATCH request, passing the userId as a query parameter
-            const response = await fetch(`/api/editProfile?userID=${userId}`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/editProfile?userID=${userId}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
