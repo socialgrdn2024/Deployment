@@ -97,7 +97,7 @@ export default function RentalDetails() {
         const fetchRentals = async () => {
             try {
                 //fetching rental details from the API
-                const response = await fetch(`http://localhost:3000/api/GetRentalDetails?rentalID=${rentalID}`);
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/GetRentalDetails?rentalID=${rentalID}`);
                 if (!response.ok) {
                     console.log("Network response was not ok");
                     return;
@@ -183,7 +183,7 @@ export default function RentalDetails() {
         const patchRental = async () => {
             try {
                 //Patch Request to update rental details
-                const response = await fetch(`http://localhost:3000/api/editRentalDetails`,
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/editRentalDetails`,
                     {
                         method: 'PATCH',
                         headers: {

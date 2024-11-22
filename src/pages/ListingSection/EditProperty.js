@@ -112,7 +112,7 @@ const EditProperty = () => {
 		const fetchPropertyData = async () => {
 			try {
 				const response = await fetch(
-					`/api/getPropertyDetails?property_id=${id}`,
+					`${process.env.REACT_APP_BACKEND_URL}/api/getPropertyDetails?property_id=${id}`,
 					{
 						method: 'GET',
 						headers: {
@@ -391,7 +391,7 @@ const EditProperty = () => {
 				JSON.stringify(formData, null, 2)
 			);
 
-			const response = await fetch(`/api/updatePropertyListing/${id}`, {
+			const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/updatePropertyListing/${id}`, {
 				method: 'PATCH',
 				headers: {
 					'Content-Type': 'application/json',

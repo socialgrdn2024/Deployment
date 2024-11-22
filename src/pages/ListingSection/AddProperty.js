@@ -319,7 +319,7 @@ const AddProperty = () => {
 			console.log('Form Data:', formData);
 
 			// Send all data in a single request
-			const response = await fetch('/api/addPropertyListing', {
+			const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/addPropertyListing`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

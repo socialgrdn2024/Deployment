@@ -39,7 +39,7 @@ export default function RentFailed() {
         const fetchRentalDetails = async () => {
             try {
                 //Fetching Rent Details from API
-                const response = await fetch(`http://localhost:3000/api/GetRentalDetails?rentalID=${rental_id}`);
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/GetRentalDetails?rentalID=${rental_id}`);
                 if (!response.ok) {
                     console.log("Network response was not ok");
                 }

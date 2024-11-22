@@ -100,7 +100,7 @@ export default function ViewProfile() {
         const fetchUserProfile = async () => {
             try {
                 // Fetch user profile based on userID
-                const response = await fetch(`/api/getProfile?userID=${id}`);
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/getProfile?userID=${id}`);
                 if (!response.ok) {
 					setIsLoading(false);
                     throw new Error('Network response was not ok');

@@ -100,7 +100,7 @@ const ViewProperty = () => {
 			// Fetch property details from the backend
 			setIsLoading(true);
 			// API URL
-			const apiUrl = `/api/getPropertyDetails?property_id=${id}`;
+			const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/api/getPropertyDetails?property_id=${id}`;
 			console.log('Fetching property details from:', apiUrl);
 			console.log('Property ID:', id);
 			try {

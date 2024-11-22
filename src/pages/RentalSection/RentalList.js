@@ -94,7 +94,7 @@ export default function RentalList() {
         // Fetching rentals from API
         const fetchRentals = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/getRentalList?userID=${userId}`);
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/getRentalList?userID=${userId}`);
                 if (!response.ok) {
                     console.log("Network response was not ok");
                     return;

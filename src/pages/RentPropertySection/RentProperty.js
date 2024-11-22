@@ -57,7 +57,7 @@ export default function RentProperty() {
 			try {
 				//Fetching Property Details from API
 				const response = await fetch(
-					`http://localhost:3000/api/getPropertyDetails?property_id=${propertyId}`
+					`${process.env.REACT_APP_BACKEND_URL}/api/getPropertyDetails?property_id=${propertyId}`
 				);
 				if (!response.ok) {
 					console.log('Network response was not ok');
@@ -134,7 +134,7 @@ export default function RentProperty() {
 		try {
 			//API call to register rental details
 			const response = await fetch(
-				'http://localhost:3001/api/create-checkout-session',
+				`${process.env.REACT_APP_BACKEND_URL}/api/create-checkout-session`,
 				{
 					method: 'POST',
 					headers: {
@@ -183,7 +183,7 @@ export default function RentProperty() {
 		try {
 			//API call to register rental details
 			const response = await fetch(
-				'http://localhost:3000/api/registerRentalDetails',
+				`${process.env.REACT_APP_BACKEND_URL}/api/registerRentalDetails`,
 				{
 					method: 'POST',
 					headers: {

@@ -92,7 +92,7 @@ export default function ViewMyProperty() {
 			setError(null);
 			try {
 				const response = await fetch(
-					`/api/getPropertyDetails?property_id=${id}`
+					`${process.env.REACT_APP_BACKEND_URL}/api/getPropertyDetails?property_id=${id}`
 				);
 				if (!response.ok) {
 					throw new Error(`HTTP error! status: ${response.status}`);

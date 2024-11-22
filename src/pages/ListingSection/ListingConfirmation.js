@@ -35,7 +35,7 @@ export default function ListingConfirmation() {
 			try {
 				console.log('Fetching property status for property ID:', propertyId); // Log the request initiation
 				const response = await fetch(
-					`/api/getPropStatus?property_id=${propertyId}`
+					`${process.env.REACT_APP_BACKEND_URL}/api/getPropStatus?property_id=${propertyId}`
 				);
 				// Log the API response
 				const data = await response.json();

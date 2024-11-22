@@ -38,7 +38,7 @@ export default function ViewMyListings() {
 		const fetchListings = async () => {
 			try {
 				// Fetch user's property listings
-				const response = await fetch(`/api/getUserProperties?userID=${userId}`);
+				const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/getUserProperties?userID=${userId}`);
 				if (!response.ok) {
 					throw new Error('Failed to fetch property listings');
 				}

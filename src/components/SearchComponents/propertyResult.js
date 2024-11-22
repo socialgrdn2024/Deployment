@@ -12,7 +12,7 @@ export default function PropertyResult() {
     // Fetch property data from the API
     const fetchPropertyResults = async () => {
         try {
-            const response = await fetch(`/api/getSearchResults`);
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/getSearchResults`);
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }
