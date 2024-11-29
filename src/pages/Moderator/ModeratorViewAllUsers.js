@@ -47,7 +47,7 @@ export default function ModeratorViewAllUsers() {
     // Fetch all users from the database
     const fetchAllUsers = useCallback(async () => {
         try {
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/getAllUsers`);
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/getAllUsers`);
             const data = await response.json();
             setUsers(data);
             setFilteredUsers(data);
