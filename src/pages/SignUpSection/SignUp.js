@@ -143,44 +143,111 @@ export default function SignUp() {
 	// Handle the sign up form submission
 	const handleSignUp = async (event) => {
 		event.preventDefault();
-
+	
 		// Validate the form data before submitting to the server and return if there are errors
 		if (!validateForm()) {
 			return;
 		}
-
+	
 		// Send the form data to the server to create a new user
 		try {
 			const { email, password } = formData;
-
+	
 			console.log('Data being sent to the server:', formData);
-
+	
+			// Ensure the backend URL is defined
+			if (!process.env.REACT_APP_BACKEND_URL) {
+				throw new Error('Backend URL is not configured');
+			}
+	
 			// This is the POST request to add the user data to the database
 			const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/users/register`, {
 				method: 'POST',
 				credentials: 'include',
-				headers: { 'Content-Type': 'application/json' },
+				headers: { 
+					'Content-Type': 'application/json',
+					// Optional: Add any additional headers if needed
+					// 'Authorization': `Bearer ${yourToken}` 
+				},
 				body: JSON.stringify(formData),
 			});
-
-			// If the response is successful, it create a new user in Firebase and send a verification email else it will display an error message
+	
+			// Log the full response for debugging
+			console.log('Server response:', {
+				status: response.status,
+				statusText: response.statusText
+			});
+	
+			// If the response is successful, create a new user in Firebase and send a verification email
 			if (response.ok) {
-				const userCredential = await createUserWithEmailAndPassword(
-					auth,
-					email,
-					password
-				);
-				const user = userCredential.user;
-				await sendEmailVerification(user);
-				setEmailMessage('Verification email sent! Please check your inbox.');
-				navigate('/VerifyEmail');
+				try {
+					// Create user in Firebase
+					const userCredential = await createUserWithEmailAndPassword(
+						auth,
+						email,
+						password
+					);
+					const user = userCredential.user;
+	
+					// Send verification email
+					await sendEmailVerification(user);
+	
+					// Set success message and navigate
+					setEmailMessage('Verification email sent! Please check your inbox.');
+					navigate('/VerifyEmail');
+				} catch (firebaseError) {
+					// Handle Firebase-specific errors
+					console.error('Firebase registration error:', firebaseError);
+					
+					// Check if the error is due to existing user
+					if (firebaseError.code === 'auth/email-already-in-use') {
+						setErrors({ 
+							general: 'An account with this email already exists. Please sign in or use a different email.' 
+						});
+					} else {
+						setErrors({ 
+							general: `Firebase registration failed: ${firebaseError.message}` 
+						});
+					}
+				}
 			} else {
+				// Handle non-successful HTTP responses
 				const errorText = await response.text();
-				setErrors({ general: `User registration failed: ${errorText}` });
+				console.error('Server error response:', errorText);
+	
+				// Set more specific error messages based on status
+				switch (response.status) {
+					case 400:
+						setErrors({ general: 'Invalid input. Please check your information.' });
+						break;
+					case 409:
+						setErrors({ general: 'A user with this email or username already exists.' });
+						break;
+					case 500:
+						setErrors({ general: 'Server error. Please try again later.' });
+						break;
+					default:
+						setErrors({ general: `Registration failed: ${errorText}` });
+				}
 			}
 		} catch (error) {
-			setErrors({ general: error.message });
-			console.error(error);
+			// Handle network errors or other unexpected errors
+			console.error('Signup process error:', error);
+	
+			// Provide user-friendly error messages
+			if (error.message === 'Failed to fetch') {
+				setErrors({ 
+					general: 'Unable to connect to the server. Please check your internet connection.' 
+				});
+			} else if (error.message === 'Backend URL is not configured') {
+				setErrors({ 
+					general: 'Server configuration error. Please contact support.' 
+				});
+			} else {
+				setErrors({ 
+					general: `Unexpected error: ${error.message}` 
+				});
+			}
 		}
 	};
 
