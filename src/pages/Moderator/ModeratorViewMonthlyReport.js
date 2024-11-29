@@ -22,7 +22,7 @@ export default function ModeratorViewMonthlyReport() {
     useEffect(() => {
         const fetchMonthlyReport = async () => {
             try {
-                const response = await fetch(`/api/GetMonthlyReportAPI?year=${year}&month=${month}`);
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/GetMonthlyReportAPI?year=${year}&month=${month}`);
                 if (!response.ok) {
                     const errorText = await response.text(); // Get the error text from the response
                     throw new Error(`Error: ${response.status} - ${errorText}`);

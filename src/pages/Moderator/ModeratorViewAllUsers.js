@@ -47,7 +47,7 @@ export default function ModeratorViewAllUsers() {
     // Fetch all users from the database
     const fetchAllUsers = useCallback(async () => {
         try {
-            const response = await fetch('/api/getAllUsers');
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/getAllUsers`);
             const data = await response.json();
             setUsers(data);
             setFilteredUsers(data);
@@ -93,7 +93,7 @@ export default function ModeratorViewAllUsers() {
     const handleUserStatus = async (userID, status) => {
         const newStatus = status === '1' ? '0' : '1';
         try {
-            const response = await fetch(`/api/handleUserStatus?userID=${userID}`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/handleUserStatus?userID=${userID}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ status: newStatus }),

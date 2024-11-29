@@ -65,7 +65,7 @@ export default function ModeratorViewReport() {
     useEffect(() => {
         const fetchGrossEarnings = async () => {
         try {
-            const response = await fetch(`/api/getAllEarningsReport`); // Fetching earnings report from API
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/getAllEarningsReport`); // Fetching earnings report from API
             if (!response.ok) {
             throw new Error("Failed to fetch gross earnings"); // Throwing an error if the response is not ok
             }
@@ -98,7 +98,7 @@ export default function ModeratorViewReport() {
         setSelectedMonth({ year, month }); // Setting the selected month
         setModalLoading(true); // Setting modal loading state to true
         try {
-            const response = await fetch(`/api/getAllMonthlyReport?year=${year}&month=${monthNumber}`); // Fetching detailed earnings data from API
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/getAllMonthlyReport?year=${year}&month=${monthNumber}`); // Fetching detailed earnings data from API
             if (!response.ok) {
                 throw new Error("Failed to fetch detailed earnings"); // Throwing an error if the response is not ok
             }
