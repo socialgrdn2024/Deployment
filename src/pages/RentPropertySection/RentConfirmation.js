@@ -85,7 +85,7 @@ export default function RentConfirmation() {
         const patchRental = async () => {
             try {
                 //Patch Request to update rental details
-                const response = await fetch(`http://localhost:3000/api/editRentalDetails`,
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/editRentalDetails`,
                     {
                         method: 'PATCH',
                         headers: {
