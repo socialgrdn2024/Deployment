@@ -99,7 +99,7 @@ export default function GrossEarnings() {
 		try {
 			// Fetch detailed earnings API route
 			const response = await fetch(
-				`/api/GetEarnings/details?userID=${userId}&year=${year}&month=${monthNumber}`
+				`${process.env.REACT_APP_BACKEND_URL}/api/GetEarnings/details?userID=${userId}&year=${year}&month=${monthNumber}`
 			);
 			// Check if the response is not OK
 			if (!response.ok) {
