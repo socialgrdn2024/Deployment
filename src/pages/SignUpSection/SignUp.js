@@ -161,13 +161,11 @@ export default function SignUp() {
 			}
 	
 			// This is the POST request to add the user data to the database
-			const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/users/register`, {
+			const response = await fetch('/api/users/register', {
 				method: 'POST',
 				credentials: 'include',
 				headers: { 
 					'Content-Type': 'application/json',
-					// Optional: Add any additional headers if needed
-					// 'Authorization': `Bearer ${yourToken}` 
 				},
 				body: JSON.stringify(formData),
 			});
